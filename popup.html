@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+      html {
+        font-size: 16px;
+      }
+
+      body {
+        min-width: 200px;
+        padding: 1rem;
+      }
+
+      h1 {
+        font-size: 1.2rem;
+        margin-bottom: 1rem;
+      }
+
+      form > div {
+        margin-bottom: 0.5rem;
+      }
+
+      label {
+        display: block;
+        margin-bottom: 0.15rem;
+        font-size: 12px;
+      }
+
+      input {
+        width: 100%;
+        height: 32px;
+        border-radius: 4px;
+        border: 1px solid #d9d9d9;
+        padding: 0 4px 0 5px;
+        font-size: 12px;
+      }
+
+      input:hover, input:focus {
+        border-color: #f70;;
+      }
+
+      .buttons {
+        display: flex;
+        align-items: center;
+        justify-content: flex-end;
+        gap: 4px;
+        margin-top: 1rem;
+        margin-bottom: 0;
+      }
+
+      button {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        text-align: center;
+
+        min-width: 50px;
+        height: 24px;
+        font-size: 14px;
+        font-weight: 400;
+        border-radius: 2px;
+        border: 1px solid;
+        padding: 0 8px;
+
+        cursor: pointer;
+      }
+
+      [data-type="submit"] {
+        background-color: #f70;
+        color: #fff;
+        border-color: #f70;
+      }
+
+      [data-type="cancel"] {
+        color: #666;
+        background: #F9F9F9;
+        border: 1px solid #E4E4E4;
+      }
+    </style>
+  </head>
+
+  <body>
+    <h1>Bulk add price</h1>
+    <form>
+      <div>
+        <label for="fees">Fees:</label>
+        <input type="number" name="fees" id="fees" min="0" value="15" />
+      </div>
+      <div>
+        <label for="fee-ammount">Fee ammount:</label>
+        <input type="number" name="fee-ammount" id="fee-ammount" min="0" value="0.3" step="0.1" />
+      </div>
+      <div>
+        <label for="profit">Profit:</label>
+        <input type="number" name="profit" id="profit" value="10" />
+      </div>
+      <div class="buttons">
+        <button type="submit" data-type="submit">Submit</button>
+      </div>
+    </form>
+    <script src="popup.js"></script>
+  </body>
+</html>
