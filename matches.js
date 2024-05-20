@@ -213,11 +213,7 @@ chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
       return;
     }
 
-    const items = manualListIframe.contentDocument.querySelectorAll(
-      '#pdlist-Table-li'
-    )
-
-    
+    const items = manualListIframe.contentDocument.querySelectorAll('#pdlist-Table-li');
 
     if (!items.length) {
       sendResponse({
@@ -229,10 +225,8 @@ chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
       const checkbox = item.querySelector('.check-box .iconfont');
       const isSelected = checkbox?.classList.contains('iconicon');
       if (!isSelected) return;
-      
-      const input = item.querySelector(
-        'input[ng-model="item.price"]'
-      );
+
+      const input = item.querySelector('input[ng-model="item.price"]');
 
       let dropshippingPrice = input.closest('div')?.previousElementSibling?.innerText;
       if (dropshippingPrice) dropshippingPrice = Number(dropshippingPrice.replace(/^\D+/g, ''));
@@ -240,10 +234,14 @@ chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
 
       const productCost = dropshippingPrice;
       const fixedTransactionFee = message['fee-ammount'];
-      const profit = message.profit;
+      const dollarProfit = message['dollar-profit'];
+      const percentageProfit = message['percentage-profit'];
       const ebayFee = message.fees;
 
-      const soldPrice = (productCost + fixedTransactionFee + profit) / (1 - ebayFee / 100);
+      const soldPrice =
+        (productCost + fixedTransactionFee + (productCost * percentageProfit) / 100) /
+          (1 - ebayFee / 100) +
+        dollarProfit;
 
       if (!isNaN(soldPrice)) {
         input.value = soldPrice.toFixed(2);
