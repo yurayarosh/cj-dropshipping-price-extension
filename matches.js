@@ -239,9 +239,11 @@ chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
       const ebayFee = message.fees;
 
       const soldPrice =
-        (productCost + fixedTransactionFee + (productCost * percentageProfit) / 100) /
-          (1 - ebayFee / 100) +
-        dollarProfit;
+        (productCost +
+          fixedTransactionFee +
+          (productCost * percentageProfit) / 100 +
+          dollarProfit) /
+        (1 - ebayFee / 100);
 
       if (!isNaN(soldPrice)) {
         input.value = soldPrice.toFixed(2);
